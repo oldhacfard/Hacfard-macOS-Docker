@@ -1,0 +1,43 @@
+services:
+  macos:
+    image: dockurr/macos:latest
+    container_name: hacfard-macos-vm
+    environment:
+      VERSION: "${MACOS_VERSION:-15}"
+      CPU_CORES: "${CPU_CORES:-4}"
+      RAM_SIZE: "${RAM_SIZE:-8G}"
+      DISK_SIZE: "${DISK_SIZE:-64G}"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./storage:/storage
+    expose:
+      - "8006"
+    restart: unless-stopped
+    stop_grace_period: 2m
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 8006 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 3m
+
+  dashboard:
+    image: nginx:alpine
+    container_name: hacfard-macos-dashboard
+    depends_on:
+      macos:
+        condition: service_started
+    ports:
+      - "${DASHBOARD_PORT:-8080}:80"
+    volumes:
+      - ./dashboard:/usr/share/nginx/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    name: hacfard-macos-network
