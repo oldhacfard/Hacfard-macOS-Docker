@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <title>Hacfard macOS</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="ambient"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">H</span><span>HACFARD<span class="muted"> / MACOS</span></span></a>
+    <div class="top-right"><span class="live-dot"></span><span id="connection-label">DASHBOARD READY</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="blue-line"></span> VIRTUAL MACHINE CONTROL CENTER</div>
+      <h1>Your Mac.<br><span>In a container.</span></h1>
+      <p class="intro">A real macOS virtual machine, powered by QEMU and KVM. Manage your instance from one clean workspace.</p>
+      <div class="actions">
+        <a class="primary" href="/console/" target="_blank" rel="noopener">Open macOS console <span>↗</span></a>
+        <button class="secondary" id="check-btn">Check dashboard</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel status-panel">
+        <div class="panel-head"><span>01 / SYSTEM STATUS</span><span class="tag">LOCAL</span></div>
+        <div class="status-row"><div><div class="small">DASHBOARD</div><strong id="dash-status">Checking…</strong></div><span class="status-icon" id="dash-icon">···</span></div>
+        <div class="status-row"><div><div class="small">MACOS CONSOLE</div><strong>Upstream VM console</strong></div><a class="text-link" href="/console/" target="_blank" rel="noopener">OPEN ↗</a></div>
+        <div class="footnote">The dashboard can verify its own web endpoint. VM/KVM health is confirmed by Docker on the host.</div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><span>02 / QUICK ACCESS</span><span class="tag blue-tag">READY</span></div>
+        <a class="access-row" href="/console/" target="_blank" rel="noopener"><span class="access-icon">⌘</span><span><b>macOS Console</b><small>Open the upstream browser console</small></span><span class="arrow">↗</span></a>
+        <a class="access-row" href="/health" target="_blank" rel="noopener"><span class="access-icon">⌁</span><span><b>Dashboard Health</b><small>Check the web interface endpoint</small></span><span class="arrow">↗</span></a>
+      </article>
+    </section>
+    <section class="notice"><span class="notice-mark">i</span><p><b>First boot?</b> The VM downloads recovery files before the installer appears. Use Disk Utility to erase the virtual disk as APFS, then install macOS. Do not delete the <code>storage</code> folder when restarting.</p></section>
+    <footer><span>HACFARD SYSTEMS</span><span>DOCKER · QEMU · KVM</span><span>BUILD 1.0.0</span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
