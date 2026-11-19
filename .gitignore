@@ -1,0 +1,5 @@
+.env
+storage/
+*.qcow2
+*.img
+.DS_Store
